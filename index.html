@@ -1,0 +1,270 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Ask Your Doubts</title>  
+    <style>  
+        body {  
+            font-family: 'Poppins', sans-serif;  
+            margin: 0;  
+            padding: 0;  
+            background: #121212;  
+            text-align: center;  
+            color: white;  
+        }  .navbar {  
+        position: fixed;  
+        top: 0;  
+        width: 100%;  
+        background: rgba(0, 0, 0, 0.4);  
+        padding: 15px 0;  
+        z-index: 1000;  
+        box-shadow: 0 0 15px rgba(173, 216, 230, 0.8);  
+        backdrop-filter: blur(5px);  
+    }  
+
+    .container {  
+        max-width: 900px;  
+        margin: 100px auto 30px;  
+        padding: 20px;  
+        background: rgba(255, 255, 255, 0.1);  
+        border-radius: 15px;  
+    }  
+
+    textarea {  
+        width: 100%;  
+        padding: 12px;  
+        margin: 10px 0;  
+        border: none;  
+        border-radius: 12px;  
+        font-size: 16px;  
+        resize: none;  
+        background: rgba(255, 255, 255, 0.1);  
+        color: white;  
+    }  
+
+    .upload-btn {  
+        background: linear-gradient(135deg, #0984e3, #74b9ff);  
+        border: none;  
+        padding: 12px 20px;  
+        border-radius: 30px;  
+        cursor: pointer;  
+        color: white;  
+        font-size: 16px;  
+        font-weight: bold;  
+        margin: 10px;  
+        display: inline-block;  
+    }  
+
+    .subjects {  
+        display: flex;  
+        flex-wrap: wrap;  
+        justify-content: center;  
+        gap: 15px;  
+        margin-top: 20px;  
+    }  
+
+    .subject-btn {  
+        background: linear-gradient(135deg, #6c5ce7, #a29bfe);  
+        border: none;  
+        padding: 12px 20px;  
+        border-radius: 30px;  
+        cursor: pointer;  
+        color: white;  
+        font-size: 16px;  
+        font-weight: bold;  
+        transition: 0.3s;  
+    }  
+
+    .doubt-list {  
+        background: rgba(255, 255, 255, 0.1);  
+        padding: 15px;  
+        border-radius: 12px;  
+        margin-top: 10px;  
+        text-align: left;  
+    }  
+
+    .doubt-item {  
+        display: flex;  
+        align-items: center;  
+        justify-content: space-between;  
+        padding: 10px;  
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);  
+    }  
+
+    .doubt-image {  
+        max-width: 80px;  
+        height: auto;  
+        border-radius: 10px;  
+        margin-left: 10px;  
+    }  
+
+    .delete-doubt-btn {  
+        background: red;  
+        border: none;  
+        padding: 10px 15px;  
+        border-radius: 10px;  
+        cursor: pointer;  
+        color: white;  
+        font-size: 16px;  
+        margin-left: 10px;  
+    }  
+</style>
+
+</head>  
+<body>  <div class="navbar">  
+    <h1>AskVault - Ask Your Doubts</h1>  
+</div>  
+
+<div class="container">  
+    <h2>Ask Your Doubts</h2>  
+    <textarea id="doubt" rows="4" placeholder="Enter your doubt here..." required></textarea>  
+      
+    <label class="upload-btn">  
+        Upload Image  
+        <input type="file" id="fileUpload" accept="image/*" onchange="previewImage(event)" style="display: none;">  
+    </label>  
+      
+    <div id="imagePreview" style="display: none; margin-top: 10px;">  
+        <img id="previewImg" src="" alt="Image Preview" style="max-width: 100px; border-radius: 10px;">  
+        <button onclick="removeImage(event)" class="delete-doubt-btn">Remove</button>  
+    </div>  
+
+    <div class="subjects">  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Physics')">Physics</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Chemistry')">Chemistry</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Maths')">Maths</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Biology')">Biology</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('English')">English</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('CS')">CS</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('History')">History</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Civics')">Civics</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Geography')">Geography</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Economics')">Economics</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('PE')">PE</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('FA')">FA</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Hindi')">Hindi</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Sanskrit')">Sanskrit</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('EG')">EG</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('EPS')">EPS</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('B.St')">B.St</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Accountancy')">Accountancy</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('Psychology')">Psychology</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('H.Sc')">H.Sc</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('E.St')">E.St</button>  
+        <button type="button" class="subject-btn" onclick="submitDoubt('P.Sc')">P.Sc</button>  
+    </div>  
+
+    <div id="doubtsContainer">  
+        <h3>Physics</h3><div id="Physics" class="doubt-list"></div>  
+        <h3>Chemistry</h3><div id="Chemistry" class="doubt-list"></div>  
+        <h3>Maths</h3><div id="Maths" class="doubt-list"></div>  
+        <h3>Biology</h3><div id="Biology" class="doubt-list"></div>  
+        <h3>English</h3><div id="English" class="doubt-list"></div>  
+        <h3>CS</h3><div id="CS" class="doubt-list"></div>  
+        <h3>History</h3><div id="History" class="doubt-list"></div>  
+        <h3>Civics</h3><div id="Civics" class="doubt-list"></div>  
+        <h3>Geography</h3><div id="Geography" class="doubt-list"></div>  
+        <h3>Economics</h3><div id="Economics" class="doubt-list"></div>  
+        <h3>PE</h3><div id="PE" class="doubt-list"></div>  
+        <h3>FA</h3><div id="FA" class="doubt-list"></div>  
+        <h3>Hindi</h3><div id="Hindi" class="doubt-list"></div>  
+        <h3>Sanskrit</h3><div id="Sanskrit" class="doubt-list"></div>  
+        <h3>EG</h3><div id="EG" class="doubt-list"></div>  
+        <h3>EPS</h3><div id="EPS" class="doubt-list"></div>  
+        <h3>B.St</h3><div id="B.St" class="doubt-list"></div>  
+        <h3>Accountancy</h3><div id="Accountancy" class="doubt-list"></div>  
+        <h3>Psychology</h3><div id="Psychology" class="doubt-list"></div>  
+        <h3>H.Sc</h3><div id="H.Sc" class="doubt-list"></div>  
+        <h3>Environmental St.</h3><div id="Environmental St." class="doubt-list"></div>  
+        <h3>Pol.Sc</h3><div id="Pol.Sc" class="doubt-list"></div>  
+    </div>  
+</div>  
+
+<script>  
+    window.onload = function() {  
+        loadDoubts();  
+    };  
+
+    function previewImage(event) {  
+        const file = event.target.files[0];  
+        if (file) {  
+            const reader = new FileReader();  
+            reader.onload = function(e) {  
+                document.getElementById('previewImg').src = e.target.result;  
+                document.getElementById('imagePreview').style.display = 'block';  
+            };  
+            reader.readAsDataURL(file);  
+        }  
+    }  
+
+    function removeImage(event) {  
+        event.preventDefault();  
+        document.getElementById('imagePreview').style.display = 'none';  
+        document.getElementById('fileUpload').value = "";  
+    }  
+
+    function submitDoubt(subject) {  
+        const doubtText = document.getElementById('doubt').value.trim();  
+        const doubtImageSrc = document.getElementById('previewImg').src;  
+        if (!doubtText) return;  
+
+        const doubtItem = createDoubtItem(doubtText, doubtImageSrc, subject);  
+        document.getElementById(subject).appendChild(doubtItem);  
+        saveDoubt(subject, doubtText, doubtImageSrc);  
+
+        document.getElementById('doubt').value = "";  
+        document.getElementById('imagePreview').style.display = "none";  
+    }  
+
+    function createDoubtItem(text, imgSrc, subject) {  
+        const doubtItem = document.createElement('div');  
+        doubtItem.className = "doubt-item";  
+
+        const doubtText = document.createElement('p');  
+        doubtText.textContent = text;  
+        doubtItem.appendChild(doubtText);  
+
+        if (imgSrc && imgSrc !== window.location.href) {  
+            const img = document.createElement('img');  
+            img.src = imgSrc;  
+            img.className = "doubt-image";  
+            doubtItem.appendChild(img);  
+        }  
+
+        const deleteBtn = document.createElement('button');  
+        deleteBtn.textContent = 'Delete';  
+        deleteBtn.className = 'delete-doubt-btn';  
+        deleteBtn.onclick = function() {  
+            doubtItem.remove();  
+            deleteDoubt(subject, text);  
+        };  
+
+        doubtItem.appendChild(deleteBtn);  
+        return doubtItem;  
+    }  
+
+    function saveDoubt(subject, text, imgSrc) {  
+        let doubts = JSON.parse(localStorage.getItem('doubts')) || {};  
+        if (!doubts[subject]) doubts[subject] = [];  
+        doubts[subject].push({ text, imgSrc });  
+        localStorage.setItem('doubts', JSON.stringify(doubts));  
+    }  
+
+    function deleteDoubt(subject, text) {  
+        let doubts = JSON.parse(localStorage.getItem('doubts')) || {};  
+        doubts[subject] = doubts[subject].filter(doubt => doubt.text !== text);  
+        localStorage.setItem('doubts', JSON.stringify(doubts));  
+    }  
+
+    function loadDoubts() {  
+        let doubts = JSON.parse(localStorage.getItem('doubts')) || {};  
+        Object.keys(doubts).forEach(subject => {  
+            doubts[subject].forEach(doubt => {  
+                document.getElementById(subject).appendChild(createDoubtItem(doubt.text, doubt.imgSrc, subject));  
+            });  
+        });  
+    }  
+</script>
+
+</body>  
+</html>
