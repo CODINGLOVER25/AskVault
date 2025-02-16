@@ -63,6 +63,34 @@
             font-size: 32px;
             margin-left: 10px;
             padding: 5px;
+            position: relative;
+        }
+
+        .wave-animation {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: wave 1.5s infinite;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
         }
 
         .upload-btn {
@@ -163,6 +191,7 @@
             <textarea id="doubt" rows="4" placeholder="Enter your doubt here..." required></textarea>
             <button class="microphone-btn" onclick="startSpeechRecognition()">
                 <i class="fas fa-microphone"></i>
+                <div id="wave" class="wave-animation" style="display: none;"></div>
             </button>
         </div>
 
@@ -254,10 +283,19 @@
             const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             recognition.lang = 'en-US';
             recognition.start();
+            document.getElementById('wave').style.display = 'block';
 
+            let speechText = '';
             recognition.onresult = function(event) {
-                const speechResult = event.results[0][0].transcript;
-                document.getElementById('doubt').value = speechResult;
+                let transcript = event.results[0][0].transcript;
+                speechText += transcript;
+
+                // Update the textarea with the current speech input
+                document.getElementById('doubt').value = speechText;
+            };
+
+            recognition.onend = function() {
+                document.getElementById('wave').style.display = 'none';
             };
 
             recognition.onerror = function(event) {
@@ -274,6 +312,7 @@
             document.getElementById(subject).appendChild(doubtItem);
             saveDoubt(subject, doubtText, doubtImageSrc);
 
+            // Clear the form
             document.getElementById('doubt').value = "";
             document.getElementById('imagePreview').style.display = "none";
         }
@@ -318,7 +357,7 @@
         }
 
         function loadDoubts() {
-            const subjects = ["Physics", "Chemistry", "Maths", "Biology", "English", "CS", "History", "Civics", "Geography", "Economics", "PE", "FA", "Hindi", "Sanskrit", "EG", "EPS", "B.St", "Accountancy", "Psychology", "H.Sc", "Environmental St.", "Pol.Sc"];
+            const subjects = ["Physics"];  // Add more subjects here as needed
             subjects.forEach(subject => {
                 const doubts = JSON.parse(localStorage.getItem(subject)) || [];
                 const subjectList = document.getElementById(subject);
