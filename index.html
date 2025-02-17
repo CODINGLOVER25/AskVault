@@ -226,8 +226,8 @@
             <button type="button" class="subject-btn" onclick="submitDoubt('Accountancy')">Accountancy</button>
             <button type="button" class="subject-btn" onclick="submitDoubt('Psychology')">Psychology</button>
             <button type="button" class="subject-btn" onclick="submitDoubt('H.Sc')">H.Sc</button>
-            <button type="button" class="subject-btn" onclick="submitDoubt('E.St')">E.St</button>
-            <button type="button" class="subject-btn" onclick="submitDoubt('P.Sc')">P.Sc</button>
+            <button type="button" class="subject-btn" onclick="submitDoubt('Environmental.St')">E.St</button>
+            <button type="button" class="subject-btn" onclick="submitDoubt('Pol.Sc')">P.Sc</button>
         </div>
 
         <div id="doubtsContainer">
@@ -357,7 +357,7 @@
         }
 
         function loadDoubts() {
-            const subjects = ["Physics"];  // Add more subjects here as needed
+            const subjects = ["Physics"], ["Chemistry"], ["Maths"], ["Biology"], ["English"], ["CS"], ["History"], ["Civics"], ["Geography"], ["Economics"], ["PE"], ["FA"], ["Hindi"], ["Sanskrit"], ["EG"], ["EPS"], ["B.St"], ["Accountancy"], ["Psychology"], ["H.Sc"], ["Environmental St."], ["Pol.Sc"];  // Add more subjects here as needed
             subjects.forEach(subject => {
                 const doubts = JSON.parse(localStorage.getItem(subject)) || [];
                 const subjectList = document.getElementById(subject);
